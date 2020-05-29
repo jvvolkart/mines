@@ -1,114 +1,123 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React from 'react';
+import React, { Component } from 'react'
+import { StyleSheet, Text, View, Alert } from 'react-native'
+import params from './src/params'
+import MineField from './src/components/MineField'
+import Header from './src/components/Header'
+import LevelSelection from './src/screens/LevelSelection'
+import YouWon from './src/screens/YouWon'
+import YouLost from './src/screens/YouLost'
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+  createMinedBoard,
+  cloneBoard,
+  openField,
+  hadExplosion,
+  wonGame,
+  lostGame,
+  invertFlag,
+  flagsUsed
+} from './src/functions'
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+export default class App extends Component {
 
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
-};
+  constructor(props) {
+    super(props)
+    this.state = this.createState()
+  }
+
+  minesAmount = () => {
+    const cols = params.getColumnsAmount()
+    const rows = params.getRowsAmount()
+    return Math.ceil(cols * rows * params.difficultLevel)
+  }
+
+  createState = () => {
+    const cols = params.getColumnsAmount()
+    const rows = params.getRowsAmount()
+    return {
+      board: createMinedBoard(rows, cols, this.minesAmount()),
+      won: false,
+      lost: false,
+      showLevelSelection: false,
+      showWon: false,
+      showLost: false,
+    }
+  }
+
+  onOpenField = (row, column) => {
+    const board = cloneBoard(this.state.board)
+    openField(board, row, column)
+    const lost = hadExplosion(board)
+    const won = wonGame(board)
+
+    if (lost) {
+      lostGame(board, params.getRowsAmount(), params.getColumnsAmount())
+      this.setState({ showLost: true })
+    }
+
+    if (won && !lost) {
+      this.setState({ showWon: true })
+    }
+
+    this.setState({ board, lost, won })
+  }
+
+  onSelectField = (row, column) => {
+    const board = cloneBoard(this.state.board)
+    if (!this.state.lost && !this.state.won) {
+      invertFlag(board, row, column, this.minesAmount())
+    }
+
+    const won = wonGame(board)
+
+    if (won) {
+      this.setState({ showWon: true })
+    }
+
+
+    this.setState({ board, won })
+  }
+
+  onLevelSelected = level => {
+    params.difficultLevel = level
+    this.setState(this.createState())
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <YouWon isVisible={this.state.showWon}
+          onCancel={() => this.setState({ showWon: false })} />
+
+        <YouLost isVisible={this.state.showLost}
+          onCancel={() => this.setState({ showLost: false })} />
+
+        <LevelSelection isVisible={this.state.showLevelSelection}
+          onLevelSelected={this.onLevelSelected}
+          onCancel={() => this.setState({ showLevelSelection: false })} />
+
+        <Header flagsLeft={this.minesAmount() - flagsUsed(this.state.board)}
+          onNewGame={() => this.setState(this.createState())}
+          onButtonPress={() => this.setState({ showLevelSelection: true })}
+          difficultLevel={params.difficultLevel} />
+
+        <View style={styles.board}>
+          <MineField board={this.state.board}
+            onOpenField={this.onOpenField}
+            onSelectField={this.onSelectField}
+            showLost={this.showLost} />
+        </View>
+      </View>
+    )
+  }
+}
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+  container: {
+    flex: 1,
+    justifyContent: 'flex-end',
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
+  board: {
+    alignItems: 'center',
+    backgroundColor: '#AAA'
   },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
-
-export default App;
+})
