@@ -1,5 +1,7 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, Alert } from 'react-native'
+import { StyleSheet, View } from 'react-native'
+
 import params from './src/params'
 import MineField from './src/components/MineField'
 import Header from './src/components/Header'
@@ -32,6 +34,9 @@ export default class App extends Component {
   }
 
   createState = () => {
+    if (this.state && this.state.timer) {
+      this.stopTimer()
+    }
     const cols = params.getColumnsAmount()
     const rows = params.getRowsAmount()
     return {
@@ -64,8 +69,10 @@ export default class App extends Component {
     const lost = hadExplosion(board)
     const won = wonGame(board)
 
+    const stringTime = this.state.minutes + this.state.seconds
     if (lost) {
       this.stopTimer()
+      this.storeData(stringTime)
       lostGame(board, params.getRowsAmount(), params.getColumnsAmount())
       this.setState({ showLost: true })
     }
@@ -125,8 +132,50 @@ export default class App extends Component {
   }
 
   stopTimer() {
-    console.log('stop timer')
     clearInterval(this.state.timer);
+  }
+
+  async getData() {
+    try {
+      const jsonValue = await AsyncStorage.getItem('@rank')
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+      console.log('Erro ao trazer rank: ' + e)
+    }
+  }
+
+  async storeData(time) {
+    function letterDificult(number) {
+      switch (number) {
+        case 0.1:
+          return 'F'
+        case 0.15:
+          return 'I'
+        case 0.2:
+          return 'D'
+        default: '?'
+      }
+    }
+
+    try {
+      let rank = await this.getData()
+      if (rank === null) {
+        rank = {
+          records: []
+        }
+      }
+
+      rank.records.push({
+        time,
+        difficult: letterDificult(params.difficultLevel),
+        date: new Date()
+      })
+
+      const jsonValue = JSON.stringify(rank)
+      await AsyncStorage.setItem('@rank', jsonValue)
+    } catch (e) {
+      console.log('Erro ao salvar rank: ' + e)
+    }
   }
 
   render() {
