@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, Image } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 import Flag from './Flag'
 import ButtonLevelSelection from './ButtonLevelSelection';
 
@@ -9,16 +9,20 @@ export default props => {
             <TouchableOpacity onPress={props.onButtonPress}>
                 <ButtonLevelSelection difficultLevel={props.difficultLevel} />
             </TouchableOpacity>
-
-            <View style={styles.flagContainer}>
-                <View style={styles.flagButton}>
-                    <Flag bigger />
+            <View style={styles.middleContainer}>
+                <View style={styles.flagContainer}>
+                    <View style={styles.flagButton}>
+                        <Flag />
+                    </View>
+                    <Text style={styles.flagsLeft}>= {props.flagsLeft}</Text>
                 </View>
-                <Text style={styles.flagsLeft}>= {props.flagsLeft}</Text>
+                <View>
+                    <Text style={styles.timerText}>{`${props.minutes}:${props.seconds}`}</Text>
+                </View>
             </View>
 
             <TouchableOpacity style={styles.button} onPress={props.onNewGame}>
-                <Image source={require('../assets/imgs/reload.png')}/>
+                <Image source={require('../assets/imgs/reload.png')} />
             </TouchableOpacity>
         </View>
     )
@@ -36,15 +40,24 @@ const styles = StyleSheet.create({
         borderBottomColor: '#121212',
         borderWidth: 1,
     },
+    middleContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    timerText: {
+        color: '#DCDCDC',
+        fontSize: 22,
+        fontWeight: 'bold',
+    },
     flagContainer: {
         flexDirection: 'row',
     },
     flagButton: {
         marginTop: 10,
-        minWidth: 20,
+        minWidth: 2,
     },
     flagsLeft: {
-        fontSize: 30,
+        fontSize: 20,
         fontWeight: 'bold',
         paddingTop: 5,
         marginLeft: 20,

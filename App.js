@@ -21,6 +21,7 @@ export default class App extends Component {
 
   constructor(props) {
     super(props)
+
     this.state = this.createState()
   }
 
@@ -40,16 +41,31 @@ export default class App extends Component {
       showLevelSelection: false,
       showWon: false,
       showLost: false,
+
+      timerIsOn: false,
+      timer: null,
+      minutes: '00',
+      seconds: '00',
     }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.timer);
   }
 
   onOpenField = (row, column) => {
     const board = cloneBoard(this.state.board)
     openField(board, row, column)
+
+    if (!this.state.timerIsOn) {
+      this.startTimer()
+    }
+
     const lost = hadExplosion(board)
     const won = wonGame(board)
 
     if (lost) {
+      this.stopTimer()
       lostGame(board, params.getRowsAmount(), params.getColumnsAmount())
       this.setState({ showLost: true })
     }
@@ -67,12 +83,15 @@ export default class App extends Component {
       invertFlag(board, row, column, this.minesAmount())
     }
 
+    if (!this.state.timerIsOn) {
+      this.startTimer()
+    }
+
     const won = wonGame(board)
 
     if (won) {
       this.setState({ showWon: true })
     }
-
 
     this.setState({ board, won })
   }
@@ -82,14 +101,46 @@ export default class App extends Component {
     this.setState(this.createState())
   }
 
+  start() {
+    let timer = setInterval(() => {
+      var num = (Number(this.state.seconds) + 1).toString(),
+        count = this.state.minutes;
+
+      if (Number(this.state.seconds) == 59) {
+        count = (Number(this.state.minutes) + 1).toString();
+        num = '00';
+      }
+
+      this.setState({
+        minutes: count.length == 1 ? '0' + count : count,
+        seconds: num.length == 1 ? '0' + num : num
+      });
+    }, 1000);
+    this.setState({ timer });
+  }
+
+  startTimer() {
+    this.setState({ timerIsOn: true })
+    this.start();
+  }
+
+  stopTimer() {
+    console.log('stop timer')
+    clearInterval(this.state.timer);
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <YouWon isVisible={this.state.showWon}
-          onCancel={() => this.setState({ showWon: false })} />
+          onCancel={() => this.setState({ showWon: false })}
+          minutes={this.state.minutes}
+          seconds={this.state.seconds} />
 
         <YouLost isVisible={this.state.showLost}
-          onCancel={() => this.setState({ showLost: false })} />
+          onCancel={() => this.setState({ showLost: false })}
+          minutes={this.state.minutes}
+          seconds={this.state.seconds} />
 
         <LevelSelection isVisible={this.state.showLevelSelection}
           onLevelSelected={this.onLevelSelected}
@@ -98,7 +149,10 @@ export default class App extends Component {
         <Header flagsLeft={this.minesAmount() - flagsUsed(this.state.board)}
           onNewGame={() => this.setState(this.createState())}
           onButtonPress={() => this.setState({ showLevelSelection: true })}
-          difficultLevel={params.difficultLevel} />
+          difficultLevel={params.difficultLevel}
+          minutes={this.state.minutes}
+          seconds={this.state.seconds}
+        />
 
         <View style={styles.board}>
           <MineField board={this.state.board}
