@@ -10,7 +10,7 @@ import {
 
 export default props => {
     return (
-        <Modal 
+        <Modal
             onRequestClose={props.onCancel}
             visible={props.isVisible}
             animationType='slide'
@@ -18,7 +18,7 @@ export default props => {
             <TouchableWithoutFeedback onPress={props.onCancel}>
                 <View style={styles.frame}>
                     <View style={styles.container}>
-                        <Text style={styles.title}>Selecione o Nível</Text>
+                        <Text style={styles.title}>Dificuldade</Text>
                         <TouchableOpacity
                             style={[styles.button, styles.bgEasy]}
                             onPress={() => props.onLevelSelected(0.1)}>
@@ -52,9 +52,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#222',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingHorizontal: 15,
-        paddingVertical: 20,
-
+        paddingTop: 20,
+        paddingBottom: 30,
+        width: 280,
     },
     title: {
         fontSize: 30,
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     buttonLabel: {
         fontSize: 20,
         color: '#EEE',
-        fontWeight: 'bold',        
+        fontWeight: 'bold',
     },
     bgEasy: {
         backgroundColor: '#61de96'
