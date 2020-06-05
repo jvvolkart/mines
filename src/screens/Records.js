@@ -38,7 +38,7 @@ export default ({ navigation }) => {
         <View style={styles.container}>
             <Text style={styles.title}>Records</Text>
 
-            <View style={styles.containerScore}>
+            <View style={[styles.containerScore, styles.bgEasy]}>
                 <Text style={styles.titleDifficult}>Fácil</Text>
                 <View style={styles.containerRecords}>
                     {fRecords.map((record, index) => {
@@ -51,7 +51,7 @@ export default ({ navigation }) => {
                     })}
                 </View>
             </View>
-            <View style={styles.containerScore}>
+            <View style={[styles.containerScore, styles.bgNormal]}>
                 <Text style={styles.titleDifficult}>Intermediário</Text>
                 {iRecords.map((record, index) => {
                     return (
@@ -62,7 +62,7 @@ export default ({ navigation }) => {
                     )
                 })}
             </View>
-            <View style={styles.containerScore}>
+            <View style={[styles.containerScore, styles.bgHard]}>
                 <Text style={styles.titleDifficult}>Difícil</Text>
                 {dRecords.map((record, index) => {
                     return (
@@ -85,23 +85,25 @@ const styles = StyleSheet.create({
         paddingTop: 30,
     },
     title: {
-        color: '#ddd',
-        fontSize: 40,
-        fontWeight: 'bold',
+        fontSize: 30,
+        fontFamily: 'PressStart2PRegular',
+        color: '#DCDCDC',
         marginBottom: 20,
     },
     containerScore: {
         alignItems: 'center',
         height: 140,
         width: '80%',
-        //borderColor: '#ddd',
-        //borderWidth: 1,
-        marginBottom: 20
+        marginBottom: 20,
+        borderWidth: 4,
+        backgroundColor: '#ffffff1a',
     },
     titleDifficult: {
         color: '#ddd',
-        fontSize: 20,
-        marginBottom: 5,
+        fontSize: 15,
+        fontFamily: 'PressStart2PRegular',
+        marginTop: 17,
+        marginBottom: 15,
     },
     containerRecords: {
         width: '100%',
@@ -113,7 +115,28 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     recordText: {
+        fontSize: 10,
+        fontFamily: 'PressStart2PRegular',
         color: '#ddd',
         marginRight: 15,
+        marginBottom: 8,
     },
+    bgEasy: {
+        borderTopColor: '#6fffac',
+        borderLeftColor: '#6fffac',
+        borderRightColor: '#4bad75',
+        borderBottomColor: '#4bad75',
+    },
+    bgNormal: {
+        borderTopColor: '#71c6ff',
+        borderLeftColor: '#71c6ff',
+        borderRightColor: '#4e93c1',
+        borderBottomColor: '#4e93c1',
+    },
+    bgHard: {
+        borderTopColor: '#ff7b6e',
+        borderLeftColor: '#ff7b6e',
+        borderRightColor: '#b9554b',
+        borderBottomColor: '#b9554b',
+    }
 })

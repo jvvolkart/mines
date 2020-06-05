@@ -57,28 +57,44 @@ const styles = StyleSheet.create({
         width: 280,
     },
     title: {
-        fontSize: 30,
-        fontWeight: 'bold',
-        color: '#EEE'
+        fontSize: 20,
+        fontFamily: 'PressStart2PRegular',
+        color: '#EEE',
+        marginVertical: 10,
     },
     button: {
         marginTop: 10,
-        padding: 5,
-        minWidth: 150,
+        paddingHorizontal: 5,
+        paddingTop: 12,
+        paddingBottom: 7,
+        minWidth: 195,
         alignItems: 'center',
+        borderWidth: 4,
     },
     buttonLabel: {
-        fontSize: 20,
+        fontSize: 13,
         color: '#EEE',
-        fontWeight: 'bold',
+        fontFamily: 'PressStart2PRegular',
     },
     bgEasy: {
-        backgroundColor: '#61de96'
+        backgroundColor: '#61de96',
+        borderTopColor: '#6fffac',
+        borderLeftColor: '#6fffac',
+        borderRightColor: '#4bad75',
+        borderBottomColor: '#4bad75',
     },
     bgNormal: {
-        backgroundColor: '#5daee4'
+        backgroundColor: '#5daee4',
+        borderTopColor: '#71c6ff',
+        borderLeftColor: '#71c6ff',
+        borderRightColor: '#4e93c1',
+        borderBottomColor: '#4e93c1',
     },
     bgHard: {
-        backgroundColor: '#e4675b'
+        backgroundColor: '#e4675b',
+        borderTopColor: '#ff7b6e',
+        borderLeftColor: '#ff7b6e',
+        borderRightColor: '#b9554b',
+        borderBottomColor: '#b9554b',
     }
 })

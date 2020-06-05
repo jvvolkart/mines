@@ -43,25 +43,28 @@ const styles = StyleSheet.create({
     middleContainer: {
         alignItems: 'center',
         justifyContent: 'center',
+        marginTop: 4,
     },
     timerText: {
         color: '#DCDCDC',
-        fontSize: 22,
-        fontWeight: 'bold',
+        fontSize: 14,
+        marginTop: 5,
+        fontFamily: 'PressStart2PRegular',
     },
     flagContainer: {
         flexDirection: 'row',
+        marginRight: 4,
     },
     flagButton: {
-        marginTop: 10,
         minWidth: 2,
     },
     flagsLeft: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        paddingTop: 5,
-        marginLeft: 20,
-        color: '#DCDCDC'
+        fontSize: 13,
+        paddingTop: 3,
+        marginLeft: 25,
+        marginBottom: 2,
+        fontFamily: 'PressStart2PRegular',
+        color: '#DCDCDC',
     },
     button: {
         paddingVertical: 4,

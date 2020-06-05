@@ -9,7 +9,7 @@ export default props => {
   const { mined, opened, nearMines, exploded, flagged, flaggednotmined } = props
 
   const styleField = [styles.field]
-  if (opened) styleField.push(styles.opened) 
+  if (opened) styleField.push(styles.opened)
   if (exploded) styleField.push(styles.exploded)
   if (flagged) styleField.push(styles.flagged)
   if (!opened && !exploded) styleField.push(styles.regular)
@@ -24,10 +24,10 @@ export default props => {
 
   return (
     <TouchableWithoutFeedback onPress={props.onOpen}
-    onLongPress={props.onSelect}>
+      onLongPress={props.onSelect}>
       <View style={styleField}>
         {!mined && opened && nearMines > 0 ?
-          <Text style={[styles.label, {color: color }]}>
+          <Text style={[styles.label, { color: color }]}>
             {nearMines}</Text> : false}
         {mined && opened ? <Mine /> : false}
         {flagged && !opened && !flaggednotmined ? <Flag /> : false}
@@ -57,8 +57,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   label: {
-    fontWeight: 'bold',
+    paddingTop: 5,
     fontSize: params.fontSize,
+    fontFamily: 'PressStart2PRegular',
   },
   exploded: {
     backgroundColor: '#CF6679',

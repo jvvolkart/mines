@@ -5,14 +5,14 @@ export default ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.containerName}>
-                <Text style={styles.name}>Campo minado</Text>
+                <Text style={styles.name}>CAMPO MINADO</Text>
             </View>
             <View style={styles.containerButtons}>
                 <TouchableOpacity style={[styles.button, styles.playButton]} onPress={() => navigation.navigate('Game')}>
-                    <Text style={styles.textButton}>Jogar</Text>
+                    <Text style={styles.textButton}>JOGAR</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.button, styles.recordsButton]} onPress={() => navigation.navigate('Records')}>
-                    <Text style={[styles.textButton]}>Records</Text>
+                    <Text style={[styles.textButton]}>RECORDS</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -26,13 +26,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#222',
     },
     containerName: {
-        marginTop: 80,
-        marginBottom: 125,
+        marginTop: 90,
+        marginBottom: 80,
     },
     name: {
         color: '#ddd',
         fontSize: 40,
-        fontWeight: 'bold',
+        textAlign: 'center',
+        fontFamily: 'PressStart2PRegular',
     },
     containerButtons: {
         width: '100%',
@@ -40,17 +41,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     button: {
-        width: '50%',
-        padding: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '65%',
+        paddingHorizontal: 10,
+        paddingTop: 17,
+        paddingBottom: 10,
         marginBottom: 20,
         borderWidth: 4,
     },
     textButton: {
         color: '#fff',
         fontSize: 18,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        textTransform: 'uppercase',
+        fontFamily: 'PressStart2PRegular',
     },
     playButton: {
         backgroundColor: '#61de96',

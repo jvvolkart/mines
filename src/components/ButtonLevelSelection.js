@@ -32,20 +32,20 @@ export default props => {
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        paddingVertical: 8,
         width: 50,
         paddingVertical: 4,
-        paddingHorizontal: 6,
         borderWidth: 4,
     },
     text: {
         alignItems: 'center',
         justifyContent: 'center',
         color: '#FFF',
-        fontSize: 22,
-        fontWeight: 'bold'
+        fontSize: 18,
+        paddingTop: 8,
+        fontFamily: 'PressStart2PRegular',
     },
     bgeasy: {
+        paddingLeft: 4,
         backgroundColor: '#61de96',
         borderTopColor: '#6fffac',
         borderLeftColor: '#6fffac',
@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#4e93c1',
     },
     bghard: {
+        paddingLeft: 4,
         backgroundColor: '#e4675b',
         borderTopColor: '#ff7b6e',
         borderLeftColor: '#ff7b6e',

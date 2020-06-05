@@ -36,23 +36,27 @@ const styles = StyleSheet.create({
         backgroundColor: '#222',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 15,
+        padding: 30,
+        paddingBottom: 15,
     },
     title: {
-        fontSize: 30,
-        fontWeight: 'bold',
+        fontSize: 20,
+        fontFamily: 'PressStart2PRegular',
         color: '#DCDCDC',
     },
     smile: {
         fontSize: 60,
+        marginTop: -8,
+        marginBottom: 5,
         fontWeight: 'bold',
         transform: [{ rotate: '90deg' }],
         marginLeft: 15,
         color: '#DCDCDC',
     },
     button: {
-        marginTop: 10,
-        padding: 5,
+        marginTop: 20,
+        paddingBottom: 0,
+        paddingTop: 10,
         minWidth: 150,
         alignItems: 'center',
         backgroundColor: '#555'
@@ -60,11 +64,11 @@ const styles = StyleSheet.create({
     buttonLabel: {
         fontSize: 20,
         color: '#EEE',
-        fontWeight: 'bold',
+        fontFamily: 'PressStart2PRegular',
     },
     time: {
         color: '#DCDCDC',
-        fontSize: 22,
-        fontWeight: 'bold',
+        fontSize: 16,
+        fontFamily: 'PressStart2PRegular',
     }
 })

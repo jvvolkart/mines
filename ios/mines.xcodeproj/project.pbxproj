@@ -16,6 +16,8 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* minesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* minesTests.m */; };
+		DD53E2D6202E4B8CADE8C0C3 /* PixelGameFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2887B124A3F541DD94FB0F65 /* PixelGameFont.ttf */; };
+		5E7801CE957C45C09AAD4EEC /* PressStart2PRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD198D3DB1E548018A39C2D0 /* PressStart2PRegular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		2D02E4901E0B4A5D006451C7 /* mines-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mines-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		2887B124A3F541DD94FB0F65 /* PixelGameFont.ttf */ = {isa = PBXFileReference; name = "PixelGameFont.ttf"; path = "../src/assets/fonts/PixelGameFont/PixelGameFont.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FD198D3DB1E548018A39C2D0 /* PressStart2PRegular.ttf */ = {isa = PBXFileReference; name = "PressStart2PRegular.ttf"; path = "../src/assets/fonts/PressStart2PRegular/PressStart2PRegular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +144,7 @@
 				00E356EF1AD99517003FC87E /* minesTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				356BDAE2B9F84EA2842D7063 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -156,6 +161,16 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		356BDAE2B9F84EA2842D7063 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				2887B124A3F541DD94FB0F65 /* PixelGameFont.ttf */,
+				FD198D3DB1E548018A39C2D0 /* PressStart2PRegular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -295,6 +310,8 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				DD53E2D6202E4B8CADE8C0C3 /* PixelGameFont.ttf in Resources */,
+				5E7801CE957C45C09AAD4EEC /* PressStart2PRegular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
