@@ -35,7 +35,6 @@ export default ({ navigation }) => {
     }
 
     const getRecordsData = (records) => {
-        console.log(getRecordsByDifficult(records.records, 'F'))
         setFRecords(getRecordsByDifficult(records.records, 'F'))
         setIRecords(getRecordsByDifficult(records.records, 'I'))
         setDRecords(getRecordsByDifficult(records.records, 'D'))
