@@ -75,7 +75,6 @@ export default class App extends Component {
             if (lost) {
                 if (this.state.timerIsOn) {
                     this.stopTimer()
-                    this.storeData(stringTime)
                 }
 
                 lostGame(board, params.getRowsAmount(), params.getColumnsAmount())
@@ -83,6 +82,11 @@ export default class App extends Component {
             }
 
             if (won && !lost) {
+                if (this.state.timerIsOn) {
+                    this.stopTimer()
+                    this.storeData(stringTime)
+                }
+
                 this.setState({ showWon: true })
             }
 
